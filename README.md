@@ -4,7 +4,7 @@ Create an Observable from a History object.
 
 ```ts
 import { createBrowserHistory } from "history";
-import { fromHistory } from "rx-history";
+import { fromHistory } from "@evertbouw/rx-history";
 
 const history = createBrowserHistory();
 const location$ = fromHistory(history);

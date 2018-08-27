@@ -1,18 +1,15 @@
-# Observable.fromHistory
+# fromHistory
 
 Create an Observable from a History object.
 
-```js
-import createHistory from 'history';
+```ts
+import { createBrowserHistory } from "history";
+import { fromHistory } from "rx-history";
 
-let history = createHistory();
+const history = createBrowserHistory();
+const location$ = fromHistory(history);
 
-import { Observable } from 'rxjs';
-import 'rx-history';
-
-Observable.fromHistory(history)
-  .pluck("pathname")
-  .tap( (path) => {
-    console.log("Path change!", path);
-  });
+location$.subscribe(([location, action]) => {
+  console.log("Path change!", location.pathname, action);
+});
 ```

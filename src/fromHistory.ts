@@ -16,8 +16,8 @@ export function fromHistory<LocationState>(
 ): Observable<[Location<LocationState>, Action]> {
   let unregisterCallback: UnregisterCallback;
 
-  function addHandler(handler: LocationListener): void {
-    unregisterCallback = history.listen(handler);
+  function addHandler(handler: Function): void {
+    unregisterCallback = history.listen(<LocationListener>handler);
     handler(history.location, history.action);
   }
 
@@ -28,7 +28,7 @@ export function fromHistory<LocationState>(
   }
 
   return fromEventPattern<[Location<LocationState>, Action]>(
-    <(handler: Function) => void>addHandler,
+    addHandler,
     removeHandler
   );
 }
